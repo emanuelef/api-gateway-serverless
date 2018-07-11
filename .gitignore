@@ -57,5 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+env.yml
+
 # next.js build output
 .next
+.serverless/cloudformation-template-update-stack.json
+.serverless/serverless-state.json

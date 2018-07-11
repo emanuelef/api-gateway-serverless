@@ -10,6 +10,15 @@
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}",
       "name": "aws",
       "runtime": "nodejs8.10",
+      "environment": {
+        "APP_NAME": "api-gateway-serverless",
+        "MYSQL_DB_ENDPOINT": "mysqlinstance.cjbtq86xugwp.eu-west-2.rds.amazonaws.com",
+        "MYSQL_DB_USERNAME": "emafuma",
+        "MYSQL_DB_PASSWORD": "ashbeck5320",
+        "MYSQL_DB_NAME": "airTrMySql",
+        "MYSQL_DB_TABLE_ALL": "all-devs",
+        "MYSQL_DB_TABLE_PASSAGES": "flight-dev"
+      },
       "versionFunctions": true,
       "remoteFunctionData": null,
       "compiledCloudFormationTemplate": {
@@ -23,6 +32,12 @@
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
               "LogGroupName": "/aws/lambda/api-gateway-serverless-dev-hello"
+            }
+          },
+          "FlightsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/api-gateway-serverless-dev-flights"
             }
           },
           "IamRoleLambdaExecution": {
@@ -67,6 +82,9 @@
                         "Resource": [
                           {
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-hello:*"
+                          },
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-flights:*"
                           }
                         ]
                       },
@@ -78,6 +96,9 @@
                         "Resource": [
                           {
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-hello:*:*"
+                          },
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-flights:*:*"
                           }
                         ]
                       }
@@ -106,7 +127,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/api-gateway-serverless/dev/1531321869036-2018-07-11T15:11:09.036Z/api-gateway-serverless.zip"
+                "S3Key": "serverless/api-gateway-serverless/dev/1531323829661-2018-07-11T15:43:49.661Z/api-gateway-serverless.zip"
               },
               "FunctionName": "api-gateway-serverless-dev-hello",
               "Handler": "handler.hello",
@@ -118,21 +139,79 @@
                 ]
               },
               "Runtime": "nodejs8.10",
-              "Timeout": 6
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "APP_NAME": "api-gateway-serverless",
+                  "MYSQL_DB_ENDPOINT": "mysqlinstance.cjbtq86xugwp.eu-west-2.rds.amazonaws.com",
+                  "MYSQL_DB_USERNAME": "emafuma",
+                  "MYSQL_DB_PASSWORD": "ashbeck5320",
+                  "MYSQL_DB_NAME": "airTrMySql",
+                  "MYSQL_DB_TABLE_ALL": "all-devs",
+                  "MYSQL_DB_TABLE_PASSAGES": "flight-dev"
+                }
+              }
             },
             "DependsOn": [
               "HelloLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "HelloLambdaVersiong74w9LcdRFPW9dxNds0PCjhIFj9XjB4fm7LwioSWIU": {
+          "HelloLambdaVersionGnBogvDh4kdlt7JFyZ6JmG7wjeQC3f8DpsafuAq4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "EmOnolN/F4KP5t1hiuLBk03aHCdSk6r7vjdz5/VV9ZM="
+              "CodeSha256": "tLs9SKgFQk1WjkvvmPW5RkVWgKSH2JeCzJl7hZP8m7k="
+            }
+          },
+          "FlightsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/api-gateway-serverless/dev/1531323829661-2018-07-11T15:43:49.661Z/api-gateway-serverless.zip"
+              },
+              "FunctionName": "api-gateway-serverless-dev-flights",
+              "Handler": "flights.main",
+              "MemorySize": 1024,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              },
+              "Runtime": "nodejs8.10",
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "APP_NAME": "api-gateway-serverless",
+                  "MYSQL_DB_ENDPOINT": "mysqlinstance.cjbtq86xugwp.eu-west-2.rds.amazonaws.com",
+                  "MYSQL_DB_USERNAME": "emafuma",
+                  "MYSQL_DB_PASSWORD": "ashbeck5320",
+                  "MYSQL_DB_NAME": "airTrMySql",
+                  "MYSQL_DB_TABLE_ALL": "all-devs",
+                  "MYSQL_DB_TABLE_PASSAGES": "flight-dev"
+                }
+              }
+            },
+            "DependsOn": [
+              "FlightsLogGroup",
+              "IamRoleLambdaExecution"
+            ]
+          },
+          "FlightsLambdaVersionFQsQjmPrZS6yaagV6wG3D90F07XV2vmC9rmbd1jtM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "FlightsLambdaFunction"
+              },
+              "CodeSha256": "tLs9SKgFQk1WjkvvmPW5RkVWgKSH2JeCzJl7hZP8m7k="
             }
           },
           "ApiGatewayRestApi": {
@@ -156,6 +235,68 @@
                 ]
               },
               "PathPart": "hello",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceFlights": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "flights",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodFlightsOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true,
+                    "method.response.header.Access-Control-Allow-Credentials": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                      "method.response.header.Access-Control-Allow-Credentials": "'false'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceFlights"
+              },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -204,7 +345,50 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1531321869071": {
+          "ApiGatewayMethodFlightsGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceFlights"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "FlightsLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1531323829896": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -213,7 +397,8 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodHelloGet"
+              "ApiGatewayMethodHelloGet",
+              "ApiGatewayMethodFlightsGet"
             ]
           },
           "HelloLambdaPermissionApiGateway": {
@@ -222,6 +407,53 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "HelloLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "apigateway.",
+                    {
+                      "Ref": "AWS::URLSuffix"
+                    }
+                  ]
+                ]
+              },
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "FlightsLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "FlightsLambdaFunction",
                   "Arn"
                 ]
               },
@@ -273,7 +505,13 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersiong74w9LcdRFPW9dxNds0PCjhIFj9XjB4fm7LwioSWIU"
+              "Ref": "HelloLambdaVersionGnBogvDh4kdlt7JFyZ6JmG7wjeQC3f8DpsafuAq4"
+            }
+          },
+          "FlightsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "FlightsLambdaVersionFQsQjmPrZS6yaagV6wG3D90F07XV2vmC9rmbd1jtM"
             }
           },
           "ServiceEndpoint": {
@@ -346,11 +584,50 @@
         "timeout": 6,
         "runtime": "nodejs8.10",
         "vpc": {}
+      },
+      "flights": {
+        "handler": "flights.main",
+        "events": [
+          {
+            "http": {
+              "path": "flights",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "api-gateway-serverless-dev-flights",
+        "package": {
+          "artifact": ".serverless/api-gateway-serverless.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs8.10",
+        "vpc": {}
       }
     }
   },
   "package": {
-    "artifactDirectoryName": "serverless/api-gateway-serverless/dev/1531321869036-2018-07-11T15:11:09.036Z",
+    "artifactDirectoryName": "serverless/api-gateway-serverless/dev/1531323829661-2018-07-11T15:43:49.661Z",
     "artifact": ""
   }
 }
