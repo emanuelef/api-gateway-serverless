@@ -63,3 +63,5 @@ env.yml
 .next
 .serverless/cloudformation-template-update-stack.json
 .serverless/serverless-state.json
+
+.webpack

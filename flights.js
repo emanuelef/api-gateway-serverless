@@ -13,6 +13,8 @@ export async function main(event, context, callback) {
 
     context.callbackWaitsForEmptyEventLoop = false;
 
+    console.log(event.queryStringParameters);
+
     let from = 1520216000;
     let to = 1530226800;
     let lat = 51.444137;
