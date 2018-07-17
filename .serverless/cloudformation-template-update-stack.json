@@ -104,7 +104,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-gateway-serverless/dev/1531323829661-2018-07-11T15:43:49.661Z/api-gateway-serverless.zip"
+          "S3Key": "serverless/api-gateway-serverless/dev/1531810472721-2018-07-17T06:54:32.721Z/api-gateway-serverless.zip"
         },
         "FunctionName": "api-gateway-serverless-dev-hello",
         "Handler": "handler.hello",
@@ -134,14 +134,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "HelloLambdaVersionGnBogvDh4kdlt7JFyZ6JmG7wjeQC3f8DpsafuAq4": {
+    "HelloLambdaVersionPiQ9HL3ZHQ7UEkKq7V3RsVFWAK7JDadE6SfDeT6w": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "tLs9SKgFQk1WjkvvmPW5RkVWgKSH2JeCzJl7hZP8m7k="
+        "CodeSha256": "++v34v3wsR89S85dnlOWzndK6Y2GGI/5VGlw9Yjages="
       }
     },
     "FlightsLambdaFunction": {
@@ -151,7 +151,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-gateway-serverless/dev/1531323829661-2018-07-11T15:43:49.661Z/api-gateway-serverless.zip"
+          "S3Key": "serverless/api-gateway-serverless/dev/1531810472721-2018-07-17T06:54:32.721Z/api-gateway-serverless.zip"
         },
         "FunctionName": "api-gateway-serverless-dev-flights",
         "Handler": "flights.main",
@@ -181,14 +181,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "FlightsLambdaVersionFQsQjmPrZS6yaagV6wG3D90F07XV2vmC9rmbd1jtM": {
+    "FlightsLambdaVersionN89aX1oDfvNsxP985AMWbIRb3W7t1oKJMxKxybvsxc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "FlightsLambdaFunction"
         },
-        "CodeSha256": "tLs9SKgFQk1WjkvvmPW5RkVWgKSH2JeCzJl7hZP8m7k="
+        "CodeSha256": "++v34v3wsR89S85dnlOWzndK6Y2GGI/5VGlw9Yjages="
       }
     },
     "ApiGatewayRestApi": {
@@ -365,7 +365,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1531323829896": {
+    "ApiGatewayDeployment1531810472923": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -482,13 +482,13 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionGnBogvDh4kdlt7JFyZ6JmG7wjeQC3f8DpsafuAq4"
+        "Ref": "HelloLambdaVersionPiQ9HL3ZHQ7UEkKq7V3RsVFWAK7JDadE6SfDeT6w"
       }
     },
     "FlightsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "FlightsLambdaVersionFQsQjmPrZS6yaagV6wG3D90F07XV2vmC9rmbd1jtM"
+        "Ref": "FlightsLambdaVersionN89aX1oDfvNsxP985AMWbIRb3W7t1oKJMxKxybvsxc"
       }
     },
     "ServiceEndpoint": {

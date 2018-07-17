@@ -27,10 +27,31 @@ functions:
       - http:
           path: hello
           method: get
+  all:
+    handler: flights.all
+    events:
+      - http:
+          path: all
+          method: get
+          cors: true
+  allInBox:
+    handler: flights.allInBox
+    events:
+      - http:
+          path: allInBox
+          method: get
+          cors: true
   flights:
-    handler: flights.main
+    handler: flights.flights
     events:
       - http:
           path: flights
+          method: get
+          cors: true
+  allFlightsInBox:
+    handler: flights.allFlightsInBox
+    events:
+      - http:
+          path: allFlightsInBox
           method: get
           cors: true
