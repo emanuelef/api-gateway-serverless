@@ -34,6 +34,13 @@ functions:
           path: all
           method: get
           cors: true
+  allZipped:
+    handler: flights.allZipped
+    events:
+      - http:
+          path: allZipped
+          method: get
+          cors: true
   allInBox:
     handler: flights.allInBox
     events:

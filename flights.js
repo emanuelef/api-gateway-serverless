@@ -1,6 +1,14 @@
+const zlib = require('zlib');
+const {
+    promisify
+} = require('util');
+
+const zipAsync = promisify(zlib.gzip);
+
 import {
     success,
-    failure
+    failure,
+    successZipped
 } from "./libs/response-lib";
 
 const {
@@ -21,8 +29,51 @@ export async function all(event, context, callback) {
 
     try {
         let items = await startQueryingPromise(qParams.from, qParams.to);
+        const picked = (({
+            latitude,
+            longitude,
+            galtM
+        }) => ({
+            latitude,
+            longitude,
+            galtM
+        }));
+        if (qParams && qParams.latLonOnly) {
+            items = items.map(picked);
+        }
         callback(null, success(items));
     } catch (e) {
+        callback(null, failure({
+            status: false
+        }));
+    }
+}
+
+// Trying to zip directly as the option on AWS doesn't seem to work for me
+export async function allZipped(event, context, callback) {
+    context.callbackWaitsForEmptyEventLoop = false;
+    const qParams = event.queryStringParameters;
+
+    try {
+        let items = await startQueryingPromise(qParams.from, qParams.to);
+        const picked = (({
+            latitude,
+            longitude,
+            galtM
+        }) => ({
+            latitude,
+            longitude,
+            galtM
+        }));
+        if (qParams && qParams.latLonOnly) {
+            items = items.map(picked);
+        }
+
+        let gzippedResponse = await zipAsync(JSON.stringify(items));
+        console.log(gzippedResponse.byteLength);
+        callback(null, successZipped(gzippedResponse));
+    } catch (e) {
+        console.log(e.message);
         callback(null, failure({
             status: false
         }));
@@ -70,7 +121,7 @@ export async function allFlightsInBox(event, context, callback) {
     try {
         let items = await startQueryingAllFilteredPromise(qParams.from, qParams.to, Number(qParams.lat), Number(qParams.lon), Number(qParams.max));
 
-         let flightsByIcao = {};
+        let flightsByIcao = {};
 
         for (let item of items) {
             flightsByIcao[item.icao] = flightsByIcao[item.icao] || 0;
@@ -83,7 +134,7 @@ export async function allFlightsInBox(event, context, callback) {
             alt: 20 // TODO: Calculate right one
         });
 
-        let allSummaries = genFlightsStats(items, reqPosition); 
+        let allSummaries = genFlightsStats(items, reqPosition);
 
         callback(null, success(allSummaries));
     } catch (e) {

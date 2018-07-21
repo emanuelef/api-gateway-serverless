@@ -16,3 +16,19 @@ const buildResponse = (statusCode, body) => {
         body: JSON.stringify(body)
     };
 }
+
+export function successZipped(gzippedResponse) {
+
+    console.log(gzippedResponse.toString("base64"));
+
+    return {
+        statusCode: 200,
+        "isBase64Encoded": true,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+            "Content-Encoding": "gzip"
+        },
+        body: gzippedResponse.toString("base64")
+    };
+}
