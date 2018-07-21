@@ -17,6 +17,12 @@
         "LogGroupName": "/aws/lambda/api-gateway-serverless-dev-all"
       }
     },
+    "AllZippedLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/api-gateway-serverless-dev-allZipped"
+      }
+    },
     "AllInBoxLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -82,6 +88,9 @@
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-all:*"
                     },
                     {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-allZipped:*"
+                    },
+                    {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-allInBox:*"
                     },
                     {
@@ -103,6 +112,9 @@
                     },
                     {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-all:*:*"
+                    },
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-allZipped:*:*"
                     },
                     {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/api-gateway-serverless-dev-allInBox:*:*"
@@ -140,7 +152,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-gateway-serverless/dev/1531951583696-2018-07-18T22:06:23.696Z/api-gateway-serverless.zip"
+          "S3Key": "serverless/api-gateway-serverless/dev/1532184710962-2018-07-21T14:51:50.962Z/api-gateway-serverless.zip"
         },
         "FunctionName": "api-gateway-serverless-dev-hello",
         "Handler": "handler.hello",
@@ -170,14 +182,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "HelloLambdaVersionmBURXPwEmzn0tDV6h3gWzdTfjpHFsBR2svPA3ESlcDM": {
+    "HelloLambdaVersionR1ASthYCQl6PlJKQ2XHXIRKk0BKVBRVFxrPotvWBUs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "L2lqc1MUtU+aSXY2Os2uywz2vH2VlWW+76X4IvXvseg="
+        "CodeSha256": "tBPotI5xsaisDo3mxTgloqZeDOms6bTOl0T36FiX550="
       }
     },
     "AllLambdaFunction": {
@@ -187,7 +199,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-gateway-serverless/dev/1531951583696-2018-07-18T22:06:23.696Z/api-gateway-serverless.zip"
+          "S3Key": "serverless/api-gateway-serverless/dev/1532184710962-2018-07-21T14:51:50.962Z/api-gateway-serverless.zip"
         },
         "FunctionName": "api-gateway-serverless-dev-all",
         "Handler": "flights.all",
@@ -217,14 +229,61 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AllLambdaVersionjuF7b6K7CQRTBd7aIFFaHAeOpQJZMzi6JUTfPaIGY": {
+    "AllLambdaVersionhmXYg6nLOyu9L4U3fPJZz22OKj7i6OWeEie5eZpFs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AllLambdaFunction"
         },
-        "CodeSha256": "L2lqc1MUtU+aSXY2Os2uywz2vH2VlWW+76X4IvXvseg="
+        "CodeSha256": "tBPotI5xsaisDo3mxTgloqZeDOms6bTOl0T36FiX550="
+      }
+    },
+    "AllZippedLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/api-gateway-serverless/dev/1532184710962-2018-07-21T14:51:50.962Z/api-gateway-serverless.zip"
+        },
+        "FunctionName": "api-gateway-serverless-dev-allZipped",
+        "Handler": "flights.allZipped",
+        "MemorySize": 1024,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs8.10",
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "APP_NAME": "api-gateway-serverless",
+            "MYSQL_DB_ENDPOINT": "mysqlinstance.cjbtq86xugwp.eu-west-2.rds.amazonaws.com",
+            "MYSQL_DB_USERNAME": "emafuma",
+            "MYSQL_DB_PASSWORD": "ashbeck5320",
+            "MYSQL_DB_NAME": "airTrMySql",
+            "MYSQL_DB_TABLE_ALL": "all-devs",
+            "MYSQL_DB_TABLE_PASSAGES": "flight-dev"
+          }
+        }
+      },
+      "DependsOn": [
+        "AllZippedLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "AllZippedLambdaVersiongpxV3E4dcfAmSKQaXd8qWMHxpUWRRyXVdG2AmOYVTfE": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "AllZippedLambdaFunction"
+        },
+        "CodeSha256": "tBPotI5xsaisDo3mxTgloqZeDOms6bTOl0T36FiX550="
       }
     },
     "AllInBoxLambdaFunction": {
@@ -234,7 +293,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-gateway-serverless/dev/1531951583696-2018-07-18T22:06:23.696Z/api-gateway-serverless.zip"
+          "S3Key": "serverless/api-gateway-serverless/dev/1532184710962-2018-07-21T14:51:50.962Z/api-gateway-serverless.zip"
         },
         "FunctionName": "api-gateway-serverless-dev-allInBox",
         "Handler": "flights.allInBox",
@@ -264,14 +323,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AllInBoxLambdaVersionZDWubED2ScArouXR0vWb9uXu8ScRwbOkBn6LyGQX3Y": {
+    "AllInBoxLambdaVersionrIVu4DD44vksC8v0BpirWuBT0Pci2QYCPTutAdH54c": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AllInBoxLambdaFunction"
         },
-        "CodeSha256": "L2lqc1MUtU+aSXY2Os2uywz2vH2VlWW+76X4IvXvseg="
+        "CodeSha256": "tBPotI5xsaisDo3mxTgloqZeDOms6bTOl0T36FiX550="
       }
     },
     "FlightsLambdaFunction": {
@@ -281,7 +340,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-gateway-serverless/dev/1531951583696-2018-07-18T22:06:23.696Z/api-gateway-serverless.zip"
+          "S3Key": "serverless/api-gateway-serverless/dev/1532184710962-2018-07-21T14:51:50.962Z/api-gateway-serverless.zip"
         },
         "FunctionName": "api-gateway-serverless-dev-flights",
         "Handler": "flights.flights",
@@ -311,14 +370,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "FlightsLambdaVersionFzyFOvjO0NALTipMyvwliUyVJEwvtvUtge2YtYfbQ": {
+    "FlightsLambdaVersionH8XzWz7F1rvP2RUiKBzWugaO0Op6WOHnptndqMTyH8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "FlightsLambdaFunction"
         },
-        "CodeSha256": "L2lqc1MUtU+aSXY2Os2uywz2vH2VlWW+76X4IvXvseg="
+        "CodeSha256": "tBPotI5xsaisDo3mxTgloqZeDOms6bTOl0T36FiX550="
       }
     },
     "AllFlightsInBoxLambdaFunction": {
@@ -328,7 +387,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/api-gateway-serverless/dev/1531951583696-2018-07-18T22:06:23.696Z/api-gateway-serverless.zip"
+          "S3Key": "serverless/api-gateway-serverless/dev/1532184710962-2018-07-21T14:51:50.962Z/api-gateway-serverless.zip"
         },
         "FunctionName": "api-gateway-serverless-dev-allFlightsInBox",
         "Handler": "flights.allFlightsInBox",
@@ -358,14 +417,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AllFlightsInBoxLambdaVersionQXyA0hMLi0DSCJltf4hOCGwPPOnSBFgg8DdPPSoU": {
+    "AllFlightsInBoxLambdaVersion99jmgmrC46fd94YoXw8oEtIu8gqZ3PrcwzTDn9AfHPU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AllFlightsInBoxLambdaFunction"
         },
-        "CodeSha256": "L2lqc1MUtU+aSXY2Os2uywz2vH2VlWW+76X4IvXvseg="
+        "CodeSha256": "tBPotI5xsaisDo3mxTgloqZeDOms6bTOl0T36FiX550="
       }
     },
     "ApiGatewayRestApi": {
@@ -404,6 +463,21 @@
           ]
         },
         "PathPart": "all",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceAllzipped": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "allZipped",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -495,6 +569,53 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceAll"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodAllzippedOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceAllzipped"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -728,6 +849,49 @@
         "MethodResponses": []
       }
     },
+    "ApiGatewayMethodAllzippedGet": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "GET",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceAllzipped"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "AllZippedLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
     "ApiGatewayMethodAllinboxGet": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -857,7 +1021,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1531951584346": {
+    "ApiGatewayDeployment1532184711641": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -868,6 +1032,7 @@
       "DependsOn": [
         "ApiGatewayMethodHelloGet",
         "ApiGatewayMethodAllGet",
+        "ApiGatewayMethodAllzippedGet",
         "ApiGatewayMethodAllinboxGet",
         "ApiGatewayMethodFlightsGet",
         "ApiGatewayMethodAllflightsinboxGet"
@@ -926,6 +1091,53 @@
         "FunctionName": {
           "Fn::GetAtt": [
             "AllLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": {
+          "Fn::Join": [
+            "",
+            [
+              "apigateway.",
+              {
+                "Ref": "AWS::URLSuffix"
+              }
+            ]
+          ]
+        },
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "AllZippedLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "AllZippedLambdaFunction",
             "Arn"
           ]
         },
@@ -1118,31 +1330,37 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionmBURXPwEmzn0tDV6h3gWzdTfjpHFsBR2svPA3ESlcDM"
+        "Ref": "HelloLambdaVersionR1ASthYCQl6PlJKQ2XHXIRKk0BKVBRVFxrPotvWBUs"
       }
     },
     "AllLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AllLambdaVersionjuF7b6K7CQRTBd7aIFFaHAeOpQJZMzi6JUTfPaIGY"
+        "Ref": "AllLambdaVersionhmXYg6nLOyu9L4U3fPJZz22OKj7i6OWeEie5eZpFs"
+      }
+    },
+    "AllZippedLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "AllZippedLambdaVersiongpxV3E4dcfAmSKQaXd8qWMHxpUWRRyXVdG2AmOYVTfE"
       }
     },
     "AllInBoxLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AllInBoxLambdaVersionZDWubED2ScArouXR0vWb9uXu8ScRwbOkBn6LyGQX3Y"
+        "Ref": "AllInBoxLambdaVersionrIVu4DD44vksC8v0BpirWuBT0Pci2QYCPTutAdH54c"
       }
     },
     "FlightsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "FlightsLambdaVersionFzyFOvjO0NALTipMyvwliUyVJEwvtvUtge2YtYfbQ"
+        "Ref": "FlightsLambdaVersionH8XzWz7F1rvP2RUiKBzWugaO0Op6WOHnptndqMTyH8"
       }
     },
     "AllFlightsInBoxLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AllFlightsInBoxLambdaVersionQXyA0hMLi0DSCJltf4hOCGwPPOnSBFgg8DdPPSoU"
+        "Ref": "AllFlightsInBoxLambdaVersion99jmgmrC46fd94YoXw8oEtIu8gqZ3PrcwzTDn9AfHPU"
       }
     },
     "ServiceEndpoint": {
