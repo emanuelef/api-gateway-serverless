@@ -157,9 +157,12 @@ export async function allFlightsInBox(event, context, callback) {
             medianDistance,
             meanDistance,
             minDistance,
-            qRankTest,
-            belowMaxDistanceArray
+            qRankTest
         };
+
+        if (!qParams.summaryOnly) {
+            results.belowMaxDistanceArray = belowMaxDistanceArray;
+        }
 
         callback(null, success(results));
     } catch (e) {
