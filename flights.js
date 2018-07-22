@@ -3,6 +3,8 @@ const {
     promisify
 } = require('util');
 
+import * as ss from 'simple-statistics';
+
 const zipAsync = promisify(zlib.gzip);
 
 import {
@@ -32,11 +34,13 @@ export async function all(event, context, callback) {
         const picked = (({
             latitude,
             longitude,
-            galtM
+            galtM,
+            time
         }) => ({
             latitude,
             longitude,
-            galtM
+            galtM,
+            time
         }));
         if (qParams && qParams.latLonOnly) {
             items = items.map(picked);
@@ -59,11 +63,13 @@ export async function allZipped(event, context, callback) {
         const picked = (({
             latitude,
             longitude,
-            galtM
+            galtM,
+            time
         }) => ({
             latitude,
             longitude,
-            galtM
+            galtM,
+            time
         }));
         if (qParams && qParams.latLonOnly) {
             items = items.map(picked);
@@ -114,6 +120,8 @@ export async function flights(event, context, callback) {
     }
 }
 
+// http://localhost:3000/allFlightsInBox?from=1532101200&to=1532107600&lat=51.443874&lon=-0.342588&max=2500&minDistance=1200
+
 export async function allFlightsInBox(event, context, callback) {
     context.callbackWaitsForEmptyEventLoop = false;
     const qParams = event.queryStringParameters;
@@ -134,9 +142,25 @@ export async function allFlightsInBox(event, context, callback) {
             alt: 20 // TODO: Calculate right one
         });
 
-        let allSummaries = genFlightsStats(items, reqPosition);
+        const allSummaries = genFlightsStats(items, reqPosition);
+        const belowMaxDistanceArray = allSummaries.filter(el => el.minDistance < Number(qParams.minDistance));
+        const belowMaxDistance = belowMaxDistanceArray.length;
+        const onlyMinDArray = belowMaxDistanceArray.map(el => el.minDistance);
+        const medianDistance = ss.median(onlyMinDArray);
+        const meanDistance = ss.mean(onlyMinDArray);
+        const minDistance = ss.min(onlyMinDArray);
+        const qRankTest = ss.quantileRank(onlyMinDArray, medianDistance);
+    
+        const results = {
+            belowMaxDistance,
+            medianDistance,
+            meanDistance,
+            minDistance,
+            qRankTest,
+            belowMaxDistanceArray
+        };
 
-        callback(null, success(allSummaries));
+        callback(null, success(results));
     } catch (e) {
         callback(null, failure({
             status: false

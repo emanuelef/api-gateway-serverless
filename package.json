@@ -24,6 +24,7 @@
   "dependencies": {
     "air-commons": "git+https://github.com/emanuelef/air-commons.git",
     "babel-runtime": "^6.26.0",
+    "simple-statistics": "^6.1.0",
     "source-map-support": "^0.4.18"
   }
 }
