@@ -27,7 +27,7 @@ exports.genFlightsStats = (allOrderedSamples, position) => {
                 if (resSummary.samples > 2) {
                     allSummaries.push(resSummary);
                 }
-                console.log(resSummary);
+                //console.log(resSummary);
                 toRemoveSet.add(flight);
             }
         }

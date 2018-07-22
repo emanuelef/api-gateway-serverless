@@ -76,10 +76,10 @@ export async function allZipped(event, context, callback) {
         }
 
         let gzippedResponse = await zipAsync(JSON.stringify(items));
-        console.log(gzippedResponse.byteLength);
+        //console.log(gzippedResponse.byteLength);
         callback(null, successZipped(gzippedResponse));
     } catch (e) {
-        console.log(e.message);
+        //console.log(e.message);
         callback(null, failure({
             status: false
         }));
@@ -146,11 +146,12 @@ export async function allFlightsInBox(event, context, callback) {
         const belowMaxDistanceArray = allSummaries.filter(el => el.minDistance < Number(qParams.minDistance));
         const belowMaxDistance = belowMaxDistanceArray.length;
         const onlyMinDArray = belowMaxDistanceArray.map(el => el.minDistance);
-        const medianDistance = ss.median(onlyMinDArray);
-        const meanDistance = ss.mean(onlyMinDArray);
-        const minDistance = ss.min(onlyMinDArray);
-        const qRankTest = ss.quantileRank(onlyMinDArray, medianDistance);
-    
+
+        const medianDistance = belowMaxDistance > 0 ? ss.median(onlyMinDArray) : undefined;
+        const meanDistance = belowMaxDistance > 0 ? ss.mean(onlyMinDArray) : undefined;
+        const minDistance = belowMaxDistance > 0 ? ss.min(onlyMinDArray) : undefined;
+        const qRankTest = belowMaxDistance > 0 ? ss.quantileRank(onlyMinDArray, medianDistance) : undefined;
+
         const results = {
             belowMaxDistance,
             medianDistance,
@@ -162,6 +163,7 @@ export async function allFlightsInBox(event, context, callback) {
 
         callback(null, success(results));
     } catch (e) {
+        console.log(e.message);
         callback(null, failure({
             status: false
         }));

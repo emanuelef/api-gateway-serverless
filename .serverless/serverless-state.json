@@ -175,7 +175,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/api-gateway-serverless/dev/1532248342356-2018-07-22T08:32:22.356Z/api-gateway-serverless.zip"
+                "S3Key": "serverless/api-gateway-serverless/dev/1532250058530-2018-07-22T09:00:58.530Z/api-gateway-serverless.zip"
               },
               "FunctionName": "api-gateway-serverless-dev-hello",
               "Handler": "handler.hello",
@@ -205,14 +205,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "HelloLambdaVersionUFd9a13sXI69AeWuZoG4eyd9uQpYIl3CqmIizCS8": {
+          "HelloLambdaVersionA7Cfg2dwbXOwecWAXD0q1YmcEdvKIaKiLgdh7Zbuh5c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "Z47BUqOaRbyxnNo7lAZbbaqIXH2n1iIwXkddZbe1Svs="
+              "CodeSha256": "/UPnkdPYc+UsDLWxKwcRf2B6tlUaGKkJJ4JGEkAXEyM="
             }
           },
           "AllLambdaFunction": {
@@ -222,7 +222,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/api-gateway-serverless/dev/1532248342356-2018-07-22T08:32:22.356Z/api-gateway-serverless.zip"
+                "S3Key": "serverless/api-gateway-serverless/dev/1532250058530-2018-07-22T09:00:58.530Z/api-gateway-serverless.zip"
               },
               "FunctionName": "api-gateway-serverless-dev-all",
               "Handler": "flights.all",
@@ -252,14 +252,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AllLambdaVersionBNsW50UMfmEGVX98uVE11lhdZoe5dot1Vf8EwOAvA": {
+          "AllLambdaVersionImIpEVehgMhY8H7gNFYjukDZPYewI9XJGNrNilDe8c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AllLambdaFunction"
               },
-              "CodeSha256": "Z47BUqOaRbyxnNo7lAZbbaqIXH2n1iIwXkddZbe1Svs="
+              "CodeSha256": "/UPnkdPYc+UsDLWxKwcRf2B6tlUaGKkJJ4JGEkAXEyM="
             }
           },
           "AllZippedLambdaFunction": {
@@ -269,7 +269,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/api-gateway-serverless/dev/1532248342356-2018-07-22T08:32:22.356Z/api-gateway-serverless.zip"
+                "S3Key": "serverless/api-gateway-serverless/dev/1532250058530-2018-07-22T09:00:58.530Z/api-gateway-serverless.zip"
               },
               "FunctionName": "api-gateway-serverless-dev-allZipped",
               "Handler": "flights.allZipped",
@@ -299,14 +299,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AllZippedLambdaVersionJ1MurVI04AwRcL6XoABSjh0CxV0qlAYdwzxGFnbmF8": {
+          "AllZippedLambdaVersionGGqP6zNBvfBHeG0FHZYobGP3GWJGg1aUK2vojvvKJM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AllZippedLambdaFunction"
               },
-              "CodeSha256": "Z47BUqOaRbyxnNo7lAZbbaqIXH2n1iIwXkddZbe1Svs="
+              "CodeSha256": "/UPnkdPYc+UsDLWxKwcRf2B6tlUaGKkJJ4JGEkAXEyM="
             }
           },
           "AllInBoxLambdaFunction": {
@@ -316,7 +316,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/api-gateway-serverless/dev/1532248342356-2018-07-22T08:32:22.356Z/api-gateway-serverless.zip"
+                "S3Key": "serverless/api-gateway-serverless/dev/1532250058530-2018-07-22T09:00:58.530Z/api-gateway-serverless.zip"
               },
               "FunctionName": "api-gateway-serverless-dev-allInBox",
               "Handler": "flights.allInBox",
@@ -346,14 +346,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AllInBoxLambdaVersionK5OWymWWVkr0S95fHXLhyWrhQDSFDYrw8rznW4A": {
+          "AllInBoxLambdaVersionHDg940qvwonXTy0Q66mDqgnFbQ8ZXwKPEfj8CNRik": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AllInBoxLambdaFunction"
               },
-              "CodeSha256": "Z47BUqOaRbyxnNo7lAZbbaqIXH2n1iIwXkddZbe1Svs="
+              "CodeSha256": "/UPnkdPYc+UsDLWxKwcRf2B6tlUaGKkJJ4JGEkAXEyM="
             }
           },
           "FlightsLambdaFunction": {
@@ -363,7 +363,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/api-gateway-serverless/dev/1532248342356-2018-07-22T08:32:22.356Z/api-gateway-serverless.zip"
+                "S3Key": "serverless/api-gateway-serverless/dev/1532250058530-2018-07-22T09:00:58.530Z/api-gateway-serverless.zip"
               },
               "FunctionName": "api-gateway-serverless-dev-flights",
               "Handler": "flights.flights",
@@ -393,14 +393,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "FlightsLambdaVersiona57QMRsKJ8TkbqPSKBjCbn4XzVO6HSxUvNzScO5xlw": {
+          "FlightsLambdaVersionpaMzjPY60EEm2IufEbScS8IkbAvhSYIzLaAebU3pmk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "FlightsLambdaFunction"
               },
-              "CodeSha256": "Z47BUqOaRbyxnNo7lAZbbaqIXH2n1iIwXkddZbe1Svs="
+              "CodeSha256": "/UPnkdPYc+UsDLWxKwcRf2B6tlUaGKkJJ4JGEkAXEyM="
             }
           },
           "AllFlightsInBoxLambdaFunction": {
@@ -410,7 +410,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/api-gateway-serverless/dev/1532248342356-2018-07-22T08:32:22.356Z/api-gateway-serverless.zip"
+                "S3Key": "serverless/api-gateway-serverless/dev/1532250058530-2018-07-22T09:00:58.530Z/api-gateway-serverless.zip"
               },
               "FunctionName": "api-gateway-serverless-dev-allFlightsInBox",
               "Handler": "flights.allFlightsInBox",
@@ -440,14 +440,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "AllFlightsInBoxLambdaVersionXkUke1NGEsFOFayUmizC2ktHUioTq6AbUsRtUFY": {
+          "AllFlightsInBoxLambdaVersionA7jT0XZoFOwswBbmiIq56lMBOaXN8vPfTrRlJu74czw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AllFlightsInBoxLambdaFunction"
               },
-              "CodeSha256": "Z47BUqOaRbyxnNo7lAZbbaqIXH2n1iIwXkddZbe1Svs="
+              "CodeSha256": "/UPnkdPYc+UsDLWxKwcRf2B6tlUaGKkJJ4JGEkAXEyM="
             }
           },
           "ApiGatewayRestApi": {
@@ -1044,7 +1044,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1532248343161": {
+          "ApiGatewayDeployment1532250059374": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1353,37 +1353,37 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionUFd9a13sXI69AeWuZoG4eyd9uQpYIl3CqmIizCS8"
+              "Ref": "HelloLambdaVersionA7Cfg2dwbXOwecWAXD0q1YmcEdvKIaKiLgdh7Zbuh5c"
             }
           },
           "AllLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AllLambdaVersionBNsW50UMfmEGVX98uVE11lhdZoe5dot1Vf8EwOAvA"
+              "Ref": "AllLambdaVersionImIpEVehgMhY8H7gNFYjukDZPYewI9XJGNrNilDe8c"
             }
           },
           "AllZippedLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AllZippedLambdaVersionJ1MurVI04AwRcL6XoABSjh0CxV0qlAYdwzxGFnbmF8"
+              "Ref": "AllZippedLambdaVersionGGqP6zNBvfBHeG0FHZYobGP3GWJGg1aUK2vojvvKJM"
             }
           },
           "AllInBoxLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AllInBoxLambdaVersionK5OWymWWVkr0S95fHXLhyWrhQDSFDYrw8rznW4A"
+              "Ref": "AllInBoxLambdaVersionHDg940qvwonXTy0Q66mDqgnFbQ8ZXwKPEfj8CNRik"
             }
           },
           "FlightsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "FlightsLambdaVersiona57QMRsKJ8TkbqPSKBjCbn4XzVO6HSxUvNzScO5xlw"
+              "Ref": "FlightsLambdaVersionpaMzjPY60EEm2IufEbScS8IkbAvhSYIzLaAebU3pmk"
             }
           },
           "AllFlightsInBoxLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AllFlightsInBoxLambdaVersionXkUke1NGEsFOFayUmizC2ktHUioTq6AbUsRtUFY"
+              "Ref": "AllFlightsInBoxLambdaVersionA7jT0XZoFOwswBbmiIq56lMBOaXN8vPfTrRlJu74czw"
             }
           },
           "ServiceEndpoint": {
@@ -1655,7 +1655,7 @@
     }
   },
   "package": {
-    "artifactDirectoryName": "serverless/api-gateway-serverless/dev/1532248342356-2018-07-22T08:32:22.356Z",
+    "artifactDirectoryName": "serverless/api-gateway-serverless/dev/1532250058530-2018-07-22T09:00:58.530Z",
     "artifact": ""
   }
 }
